@@ -299,6 +299,34 @@ tools:
 			wantTools: ToolsConfig{},
 		},
 		{
+			name: "shared skills entry with only an empty path skipped",
+			yaml: `
+tools:
+  skills:
+    - image: registry.example.com/skills:latest
+      paths:
+        - ""
+`,
+			wantTools: ToolsConfig{},
+		},
+		{
+			name: "empty path elements filtered from shared skills",
+			yaml: `
+tools:
+  skills:
+    - image: registry.example.com/skills:latest
+      paths:
+        - ""
+        - /skills/prometheus
+        - ""
+`,
+			wantTools: ToolsConfig{
+				Shared: []agenticv1alpha1.SkillsSource{
+					{Image: "registry.example.com/skills:latest", Paths: []string{"/skills/prometheus"}},
+				},
+			},
+		},
+		{
 			name: "mix of valid and invalid shared skills",
 			yaml: `
 tools:

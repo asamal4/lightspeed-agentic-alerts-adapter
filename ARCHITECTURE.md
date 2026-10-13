@@ -89,7 +89,7 @@ Passing cooldown allows an attempt; it does not change the name. An existing nam
 | `spec.verification.agent` | `agent.verification`, then `agent.default`, then `default` |
 | `spec.tools.skills` | Valid entries from `tools.skills` |
 
-The request uses [request.tmpl](internal/agenticrun/request.tmpl). It receives selected fields, not the full label map. Alert text is sanitized to remove control characters except newlines, Unicode format characters, and runs of at least three backticks. Configured skill paths appear with an `/app` prefix; otherwise the request uses the generic investigation instruction.
+The request uses [request.tmpl](internal/agenticrun/request.tmpl). It receives selected fields, not the full label map. Alert text is sanitized to remove control characters except newlines, Unicode format characters, and runs of at least three backticks. When skills are configured, the request lists their names (the final component of each configured path); otherwise it uses the generic investigation instruction.
 
 Summary is stored in an annotation, limited to 256 bytes; it is not rendered in the request. Metadata also includes the source, original fingerprint, stable group ID, alert name, severity, and start time. The [building spec](.ai/spec/what/agenticrun-building.md#output-metadata) defines this contract.
 
