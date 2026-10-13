@@ -9,6 +9,7 @@ import (
 	"encoding/hex"
 	"fmt"
 	"hash/fnv"
+	"path"
 	"regexp"
 	"slices"
 	"sort"
@@ -60,7 +61,7 @@ type requestData struct {
 	Namespace   string
 	Summary     string
 	Description string
-	SkillPaths  []string
+	SkillNames  []string
 }
 
 // Build constructs an AgenticRun from a single Alertmanager GettableAlert.
@@ -206,10 +207,10 @@ func buildAnnotations(a *models.GettableAlert) map[string]string {
 
 // buildRequest renders the embedded template with alert data for the analysis agent.
 func buildRequest(a *models.GettableAlert, sharedSkills []agenticv1alpha1.SkillsSource) (string, error) {
-	var skillPaths []string
+	var skillNames []string
 	for _, s := range sharedSkills {
 		for _, p := range s.Paths {
-			skillPaths = append(skillPaths, "/app"+p)
+			skillNames = append(skillNames, path.Base(p))
 		}
 	}
 
@@ -220,7 +221,7 @@ func buildRequest(a *models.GettableAlert, sharedSkills []agenticv1alpha1.Skills
 		Namespace:   sanitizePromptValue(a.Labels["namespace"]),
 		Summary:     sanitizePromptValue(a.Annotations["summary"]),
 		Description: sanitizePromptValue(a.Annotations["description"]),
-		SkillPaths:  skillPaths,
+		SkillNames:  skillNames,
 	}
 
 	var buf bytes.Buffer

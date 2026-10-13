@@ -311,12 +311,12 @@ func TestBuildRequestWithSkillPaths(t *testing.T) {
 		if err != nil {
 			t.Fatalf("unexpected error: %v", err)
 		}
-		if strings.Contains(p.Spec.Request, "Investigate using the skill at") {
+		if strings.Contains(p.Spec.Request, "Investigate using the following skills:") {
 			t.Error("request should not contain skill hint when no skills set")
 		}
 	})
 
-	t.Run("shared skills lists all paths with /app prefix", func(t *testing.T) {
+	t.Run("shared skills lists all skill names", func(t *testing.T) {
 		tc := config.ToolsConfig{
 			Shared: []agenticv1alpha1.SkillsSource{
 				{Image: "registry.example.com/skills:latest", Paths: []string{
@@ -329,18 +329,13 @@ func TestBuildRequestWithSkillPaths(t *testing.T) {
 		if err != nil {
 			t.Fatalf("unexpected error: %v", err)
 		}
-		for _, want := range []string{
-			"Investigate using the skill at",
-			"/app/skills/cluster-troubleshoot/investigate-alert",
-			"/app/skills/prometheus",
-		} {
-			if !strings.Contains(p.Spec.Request, want) {
-				t.Errorf("request does not contain %q\nfull request:\n%s", want, p.Spec.Request)
-			}
+		want := "Investigate using the following skills: investigate-alert prometheus"
+		if !strings.Contains(p.Spec.Request, want) {
+			t.Errorf("request does not contain %q\nfull request:\n%s", want, p.Spec.Request)
 		}
 	})
 
-	t.Run("multiple shared skill sources lists all paths", func(t *testing.T) {
+	t.Run("multiple shared skill sources lists all skill names", func(t *testing.T) {
 		tc := config.ToolsConfig{
 			Shared: []agenticv1alpha1.SkillsSource{
 				{Image: "registry.example.com/skills-a:latest", Paths: []string{"/skills/alpha"}},
@@ -351,14 +346,9 @@ func TestBuildRequestWithSkillPaths(t *testing.T) {
 		if err != nil {
 			t.Fatalf("unexpected error: %v", err)
 		}
-		for _, want := range []string{
-			"Investigate using the skill at",
-			"/app/skills/alpha",
-			"/app/skills/beta",
-		} {
-			if !strings.Contains(p.Spec.Request, want) {
-				t.Errorf("request does not contain %q\nfull request:\n%s", want, p.Spec.Request)
-			}
+		want := "Investigate using the following skills: alpha beta"
+		if !strings.Contains(p.Spec.Request, want) {
+			t.Errorf("request does not contain %q\nfull request:\n%s", want, p.Spec.Request)
 		}
 	})
 }

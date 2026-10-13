@@ -45,7 +45,7 @@ Translates AlertManager alerts into AgenticRun custom resources with determinist
 22. Unicode control characters (except newline), Unicode format characters, and backtick runs of 3 or more SHALL be stripped from alert data before template rendering.
 23. Single and double backticks SHALL be preserved.
 24. Extra labels beyond allow-listed fields (alertname, severity, namespace) SHALL NOT appear in the rendered request.
-25. When shared skills are configured with paths, the rendered request SHALL contain a skill hint listing those paths (prefixed with `/app`).
+25. When shared skills are configured with paths, the rendered request SHALL contain a skill hint listing only the skill name (the last component of each path), not the full path.
 26. When no run-level skills are configured, the rendered request SHALL contain the generic investigation instruction instead of a skill hint.
 
 ### Workflow Steps

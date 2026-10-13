@@ -190,13 +190,19 @@ func parseSkills(entries []skillsEntry, step string, logger *slog.Logger) []agen
 			logger.Warn("skills entry missing image, skipping", "step", step)
 			continue
 		}
-		if len(e.Paths) == 0 {
+		var paths []string
+		for _, p := range e.Paths {
+			if p != "" {
+				paths = append(paths, p)
+			}
+		}
+		if len(paths) == 0 {
 			logger.Warn("skills entry missing paths, skipping", "step", step)
 			continue
 		}
 		skills = append(skills, agenticv1alpha1.SkillsSource{
 			Image: e.Image,
-			Paths: e.Paths,
+			Paths: paths,
 		})
 	}
 	return skills

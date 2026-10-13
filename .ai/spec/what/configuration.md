@@ -45,7 +45,7 @@ The adapter reads settings from `/etc/alerts-adapter/config.yaml` once at startu
 18. Each optional `tools.skills` entry SHALL provide an OCI image and paths within that image. Valid entries SHALL map to `spec.tools.skills` on generated AgenticRuns.
 19. An absent `tools` key SHALL produce empty skills without an error.
 20. An entry with an empty `image` SHALL be skipped with a warning.
-21. An entry with a non-empty `image` but an empty `paths` list SHALL be skipped with a warning.
+21. An entry with a non-empty `image` SHALL have empty strings removed from `paths`. If no paths remain, the entry SHALL be skipped with a warning.
 22. A list containing valid and invalid entries SHALL retain the valid entries.
 
 ### Agent Selection
