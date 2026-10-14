@@ -19,7 +19,7 @@ LABEL com.redhat.component="lightspeed-agentic-alerts-adapter" \
       url="https://github.com/openshift/lightspeed-agentic-alerts-adapter" \
       vendor="Red Hat, Inc." \
       distribution-scope="public" \
-      cpe="cpe:/a:redhat:openshift_lightspeed:1::el9"
+      cpe="cpe:/a:redhat:openshift_lightspeed:2::el9"
 
 COPY LICENSE /licenses/LICENSE
 COPY --from=builder /opt/app-root/src/alerts-adapter /usr/local/bin/alerts-adapter
