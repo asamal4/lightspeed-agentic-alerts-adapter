@@ -46,7 +46,7 @@ File fields and defaults are defined in [configuration](configuration.md#configu
 
 ## Deployment Ownership
 
-The classic Lightspeed operator deploys the local adapter when `OLSConfig.spec.ols.deployment.alertsAdapter.configMapRef` is set. The hub operator deploys a separate multicluster adapter with local polling disabled. This repo also provides manifests for direct deployment. See the parent [deployment lifecycle](../../../../.ai/spec/what/deployment-lifecycle.md) and [multicluster contract](../../../../.ai/spec/what/alerts-adapter-multicluster.md).
+The classic Lightspeed operator deploys the local adapter when `OLSConfig.spec.ols.deployment.alertsAdapter.configMapRef` is set. The hub operator deploys a separate multicluster adapter with local polling disabled. This repo also provides manifests for direct deployment. See the parent specs `ols/.ai/spec/what/deployment-lifecycle.md` (deployment lifecycle) and `ols/.ai/spec/what/alerts-adapter-multicluster.md` (multicluster contract).
 
 ## Constraints
 
