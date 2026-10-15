@@ -10,7 +10,7 @@ All specifications live in `.ai/spec/`. Start with [.ai/spec/README.md](.ai/spec
 - Code map and reconcile flow: `.ai/spec/how/`.
 - Human architecture overview: [ARCHITECTURE.md](ARCHITECTURE.md).
 - Cross-repo contracts: the parent workspace's `.ai/spec/`.
-- `CLAUDE.md` is a symlink to this file. Edit instructions here.
+- This file holds the agent instructions. The repository tracks no `CLAUDE.md`; where one exists it is an untracked local symlink to this file. Edit instructions here.
 
 ## Commands
 
@@ -33,7 +33,7 @@ go test -run TestFunctionName/subtest_name ./internal/adapter/
 ## Conventions
 
 - Use clear English for replies, comments, and documentation.
-- Commit messages use Conventional Commits (`feat:`, `fix:`, `test:`, `docs:`, `refactor:`).
+- Commit messages use Conventional Commits (`feat:`, `fix:`, `chore:`, `test:`, `docs:`, `refactor:`).
 - Use structured JSON logging with `log/slog`. Pass loggers explicitly; `slog.SetDefault` is set in main.
 - Define interfaces in the consumer package (`adapter`).
 - Use table-driven tests.

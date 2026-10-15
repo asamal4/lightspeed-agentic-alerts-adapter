@@ -14,8 +14,6 @@ A Go component with no persistent storage that polls OpenShift AlertManager for 
 
 Covers the alerts adapter's internal behavior. Cross-repo integration contracts (multicluster credential flow, hub-spoke interaction model) live in the parent spec at `ols/.ai/spec/what/alerts-adapter-multicluster.md`.
 
-The `.ai/spec/` files are the current spec source. Implemented changes, including file-based configuration, agent overrides, and skill hints, are described here.
-
 ## Audience
 
 AI agents. Content is optimized for precision and machine consumption.
@@ -48,7 +46,7 @@ AI agents. Content is optimized for precision and machine consumption.
 
 - **Rule numbering:** behavioral rules are numbered sequentially within each what/ file. Numbers are stable identifiers; do not renumber when a rule is removed (leave a gap) or inserted (use sub-numbers like 16a, 16b). This keeps external references (Jira comments, PR descriptions) valid.
 - **Planned changes lifecycle:** unimplemented behavior is marked `[PLANNED]` or `[PLANNED: TICKET-XXXX]` inline next to the rule it affects. When implemented: update the rule text and change the marker to `[DONE: TICKET-XXXX]`. `[DONE]` markers are cleanup candidates.
-- **Constraints:** component-specific constraints go in the relevant what/ file's Constraints section. Development conventions go in AGENTS.md; CLAUDE.md is a symlink to it.
+- **Constraints:** component-specific constraints go in the relevant what/ file's Constraints section. Development conventions go in AGENTS.md.
 - **Authority:** what/ specs define behavior and how/ describes the code. Rules marked `[PLANNED]` are requirements not yet implemented; nearby text explains current limits. Parent specs own cross-repo contracts; these child specs own internal behavior.
 - **When to create a new file vs. extend an existing one:** if the concern has its own lifecycle, configuration surface, and can be understood independently, it gets its own file. If it's a capability added to an existing component, it goes in that component's file.
 
